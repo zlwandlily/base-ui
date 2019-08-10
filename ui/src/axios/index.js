@@ -19,7 +19,7 @@ axios.interceptors.request.use(config => {
 
 // 统一返回拦截处理,设置restful规范的接口返回处理
 axios.interceptors.response.use(data => {
-  if (data.status && data.status === 200 ) {
+  if (data.status && data.status === 200) {
     console.log(data.status)
   }
   return data
@@ -35,13 +35,13 @@ axios.interceptors.response.use(data => {
 })
 
 export default {
-  get (url, data, param) {
+  // get请求默认使用param传参，不适用data传参（data传参使用的是body传参）
+  get (url, param) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'get',
         url: url,
-        params: param,
-        data: data
+        params: param
       }).then(response => {
         resolve(response)
       }).catch(error => {
